@@ -1,6 +1,8 @@
 import java.awt.datatransfer.Clipboard;
 import java.util.Scanner;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 /**
  * 
  */
@@ -11,47 +13,83 @@ import java.util.Scanner;
  */
 public class TICTAC {
 	
-static String[] board;
-	/**
-	 * @param args
-	 */
 	
-	static void printboard() {
-	System.out.println("|---|---|---|");
-	System.out.println("| "+ board[0] + " | " + board[1] + " | " + board [2] + "| ");
-	System.out.println("| "+ board[3]+ " | " + board[4] + " | " + board [5] + "| ");
-	System.out.println("| "+ board[6]+ " | " + board[7]+ " | " + board [8] + "| ");
-	System.out.println("|---|---|---|");
-
-		}
 	public static void main(String[] args) { 
-		Scanner in= new Scanner(System.in);
-		board = new String [9];
-		for (int b=0; b<9; b++) {
-			board[b]=String.valueOf(b+1);
-		}
-		System.out.println("Welcome to TIC.TAC-TOE GAME");
-		System.out.println("-----------------------------");
-		printboard();
-		System.out.println("PLAYER X WILL PLAY FIRST PLZ CHOOSE A SLOT");
-		int player1= in.nextInt();
-		if (player1 ==1) {
-			System.out.println("player 1 : 1");
-			board[0]="X";
-			printboard();
-		} 
 		
-		else if (player1 ==2) {
-			System.out.println("player 1 : 2");
-			board[1]="X";
-			printboard();
-		}
+		char [][] board = { {'-','*','-','*','-'},
+                                 {' ','|',' ','|',' '},
+                                 {' ','|',' ','|',' '},
+                                 {' ','|',' ','|',' '},
+                                 {'-','*','-','*','-'} 
+                                };
+		 printboard(board); // call the function
+		 Scanner scan = new Scanner(System.in);
+		 while (true) {
+			 System.out.println("Player 1 enter your choice of slots from 1 to 9 :");
+			 int slotchoice= scan.nextInt();
+			 System.out.println(slotchoice);
+			 Slotplace(board,slotchoice, "player1");
+			 printboard(board);
+			 System.out.println(" Player 2 enter your choice of slots from 1 to 9 :");
+			 int slotchoice1= scan.nextInt();
+			 Slotplace(board,slotchoice1, "player2");
+			 printboard(board);
+		 }
+
+	}
+		
+	// function to print the board 
+	public static void printboard(char [] [] board ) {
+		
+    // for each char array named row in the print board array and for each char in the row print colums every each line  
+                for (char [] row : board ) {
+                         	for (char cloum : row ) {
+                           	System.out.print(cloum);
+    	
+                      	} 	
+                         	System.out.println();
+                }
+	}
+	// function to pass the board and the slot choice for the user eaither player 1 or 2
+	public static void Slotplace(char [][] board, int slotchoice, String user  ) {
 	
-			
+	char symbol=' ';
+	if (user.equals("player1")) {
+		symbol='X';
+		} else if (user.equals("player2")){
+			symbol='O';
+		}
+	switch (slotchoice) {
+			 case 1: 
+				 board [1][0] =symbol;
+				 break;
+			 case 2: 
+				 board [1][2] =symbol;
+				 break;
+			 case 3: 
+				 board [1][4] =symbol;
+				 break;
+			 case 4: 
+				 board [2][0] =symbol;
+				 break;
+			 case 5: 
+				 board [2][2] =symbol;
+				 break;
+			 case 6: 
+				 board [2][4] =symbol;
+				 break;
+			 case 7: 
+				 board [3][0] =symbol;
+				 break;
+			 case 8: 
+				 board [3][2] =symbol;
+				 break;
+			 case 9: 
+				 board [3][4] =symbol;
+				 break;
+			 default :
+			 System.out.println("wrong choice");
 		
-		
-		
-
 }
-
-}
+	}
+	}
