@@ -7,7 +7,6 @@ import java.util.Scanner;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
-import org.w3c.dom.UserDataHandler;
 
 /**
  * 
@@ -50,7 +49,8 @@ public class TICTAC {
 		System.out.println("player 2 will be playing with  : "+ symbolchoice2);
 
 			while (true) {
-				if (symbolchoice1=='X'|| symbolchoice1=='x' )
+				// player 1 might choose x or o (capital or small letters)
+				if (symbolchoice1=='X'|| symbolchoice1=='x'||symbolchoice1=='o'||symbolchoice1=='O'  )
 			// USER X OR O WILL BE PLAYING 
 			System.out.println("Player 1 enter your choice of slots :");
 			int slotchoice= scan.nextInt();
@@ -58,7 +58,7 @@ public class TICTAC {
 
 			printboard(board); // Prints the result on the Board 
 
-			if (symbolchoice2=='O'|| symbolchoice2=='o')
+			if (symbolchoice2=='O'|| symbolchoice2=='o'||symbolchoice2=='x'|| symbolchoice2=='X')
 			System.out.println(" Player 2 enter your choice of slots :");
 			int slotchoice1= scan.nextInt();
 			Slotplace(board,slotchoice1, symbolchoice2,slotchoiceArrayList);
