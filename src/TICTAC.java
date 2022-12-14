@@ -150,11 +150,11 @@ public class TICTAC {
 				takenBoolean= true;
 				System.out.println("Enter another slot number:");
 				slotchoice= scan.nextInt(); 
-			}
-			// END OF THE SWITCHCASE	
+			}	
 
 		} while (takenBoolean);
-
+		
+		
 		// TO CHECK THE WINNER 
 
 		// TO CHECK THE 
