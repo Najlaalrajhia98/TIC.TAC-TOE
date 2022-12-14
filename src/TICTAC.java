@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.IllegalFormatCodePointException;
 import java.util.Scanner;
 
+import javax.security.auth.x500.X500Principal;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
+
 
 
 /**
@@ -20,70 +23,100 @@ public class TICTAC {
 
 	public static void main(String[] args) { 
 
-		// Array to save the symbol for each user 
-		ArrayList<Character> sybmolArrayList =new ArrayList<Character>();
 		ArrayList<Integer> slotchoiceArrayList= new ArrayList<Integer>();
 
 
-		char [][] board = { {'-','*','-','*','-'},
+		char [][] board = { 	{'-','*','-','*','-'},
 				{' ','|',' ','|',' '},
 				{' ','|',' ','|',' '},
 				{' ','|',' ','|',' '},
 				{'-','*','-','*','-'} 
 		};
 
-		printboard(board); // call the function
+		printboard(board); // call the function to print the board.
 		Scanner scan = new Scanner(System.in);
 
-		// allows the user to choose X or O
 		boolean valid = false;
 		char symbolchoice1;
 		char symbolchoice2;
+		boolean playstatus= true;
 
-		do { 
+		do {  // player one choice of symbol
 			System.out.println("player 1 please choose a symbol X or O :");
 			symbolchoice1 = scan.next().charAt(0);
-			sybmolArrayList.add(symbolchoice1);
-			valid = true;
+			if (symbolchoice1== 'x'|| symbolchoice1== 'X'||symbolchoice1== 'O'||symbolchoice1== 'o')
+			{ 
+				valid = true;
+			} 
+			else {
+				valid=false;
+				System.out.println("its not a valid symbol enter another one ");
+			}
 		} while (!valid);
 
-		do { 
 
+		do { // player two choice of symbol
 			System.out.println("player 2 please choose a symbol X or O :");
 			symbolchoice2 = scan.next().charAt(0);
-
-			do {
-				if (symbolchoice2==symbolchoice1) {
-					System.out.print("change your symbol you enterd a chosen symbol:");
+			do { // do while loop if player 2 choose symbol of player 1
+				if (symbolchoice2==symbolchoice1) 
+				{
+					System.out.println("you enterd a symbol of player 1 plz choose another one:");
 					symbolchoice2 = scan.next().charAt(0); 
-				}
+				} 
+			} while (symbolchoice2==symbolchoice1);
+			if (symbolchoice2== 'x'|| symbolchoice2== 'X'||symbolchoice2== 'O'||symbolchoice2== 'o') 
+			{
+				valid=true;
+			}
+			else {
+				valid=false;
+				System.out.println("its not a valid symbol enter another one :");
+			}
 
-			} while (symbolchoice1==symbolchoice2);
-			valid = true;
 		} while (!valid);
+
+
+
+
 
 		System.out.println("player 1 will be playing with  : "+ symbolchoice1);
 		System.out.println("player 2 will be playing with  : "+ symbolchoice2);
 
 		for (int i=0; i<=4;i++) {
-			// player 1 might choose x or o (capital or small letters)
-			if (symbolchoice1=='X'|| symbolchoice1=='x'||symbolchoice1=='o'||symbolchoice1=='O'  )
-				// USER X OR O WILL BE PLAYING 
-				System.out.println("Player 1 enter your choice of slots :");
-			int slotchoice= scan.nextInt();
-			Slotplace(board,slotchoice, symbolchoice1,slotchoiceArrayList);
 
+			System.out.println("Player 1 enter your choice of slots :");
+			int slotchoice= scan.nextInt();
+			do {
+				if (slotchoice>9 || slotchoice<1) {
+					System.out.println("Enter a valid number ");
+					slotchoice= scan.nextInt(); 
+				}	
+			} while (slotchoice>9 || slotchoice<1);
+			Slotplace(board,slotchoice, symbolchoice1,slotchoiceArrayList);
 			printboard(board); // Prints the result on the Board 
 
-			if (symbolchoice2=='O'|| symbolchoice2=='o'||symbolchoice2=='x'|| symbolchoice2=='X')
-			////////////////////////////////////	
-				
-				System.out.println(" Player 2 enter your choice of slots :");
-			int slotchoice1= scan.nextInt();
-			Slotplace(board,slotchoice1, symbolchoice2,slotchoiceArrayList);
+			if (i==4) 
+			{
+				playstatus=false;
+				System.out.println("its a drow ! game over ");
 
-			printboard(board);
-		} 
+			}
+
+			if (playstatus) 
+			{
+				System.out.println(" Player 2 enter your choice of slots :");
+				int slotchoice1= scan.nextInt();
+				do {
+					if (slotchoice1>9 || slotchoice1<1 ) {
+						System.out.println("Enter a valid number ");
+						slotchoice1= scan.nextInt(); 
+					}
+				} while (slotchoice1>9 || slotchoice1<1 ); 
+				Slotplace(board,slotchoice1, symbolchoice2,slotchoiceArrayList);
+				printboard(board);
+			} 
+		}
 	}
 
 
@@ -124,7 +157,6 @@ public class TICTAC {
 
 			takenBoolean= false;
 			if (!slotchoiceArrayList.contains(slotchoice)){
-				takenBoolean= false;
 				slotchoiceArrayList.add(slotchoice);
 				switch (slotchoice) {
 				case 1: 
@@ -167,6 +199,8 @@ public class TICTAC {
 
 
 		} while (takenBoolean);
+
+
 
 		// TO CHECK THE WINNER 
 
