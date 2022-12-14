@@ -43,13 +43,13 @@ public class TICTAC {
 
 		System.out.println("player 2 please choose a symbol X or O :");
 		char symbolchoice2 = scan.next().charAt(0);
-		 do{
-			 if (sybmolArrayList.contains(symbolchoice1)) {
-		 }
+		 do {
+			 if (sybmolArrayList.contains(symbolchoice2)) {
 			System.out.print("change your symbol you enterd a chosen symbol:");
-			
-			symbolchoice2 = scan.next().charAt(0);
-		}while (sybmolArrayList.contains(symbolchoice2));
+			symbolchoice2 = scan.next().charAt(0); 
+			}
+			 
+		} while (sybmolArrayList.contains(symbolchoice2));
 		
 
 		System.out.println("player 1 will be playing with  : "+ symbolchoice1);
@@ -93,7 +93,8 @@ public class TICTAC {
 	}
 
 	// function to pass the board and the slot choice for the user eaither player 1 or 2
-	public static void Slotplace(char [][] board, int slotchoice, char user,ArrayList<Integer> slotchoiceArrayList) {
+	public static void Slotplace(char [][] board, int slotchoice, char user,ArrayList<Integer> slotchoiceArrayList)
+	{
 		Scanner scan = new Scanner(System.in);
 		char symbol=' ';
 		if (user == 'X' || user=='x')  
