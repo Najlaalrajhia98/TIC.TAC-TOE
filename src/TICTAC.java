@@ -36,21 +36,31 @@ public class TICTAC {
 		Scanner scan = new Scanner(System.in);
 
 		// allows the user to choose X or O
-		System.out.println("player 1 please choose a symbol X or O :");
-		char symbolchoice1 = scan.next().charAt(0);
-		sybmolArrayList.add(symbolchoice1);
+		boolean valid = false;
+		char symbolchoice1;
+		char symbolchoice2;
 
+		do { 
+			System.out.println("player 1 please choose a symbol X or O :");
+			symbolchoice1 = scan.next().charAt(0);
+			sybmolArrayList.add(symbolchoice1);
+			valid = true;
+		} while (!valid);
 
-		System.out.println("player 2 please choose a symbol X or O :");
-		char symbolchoice2 = scan.next().charAt(0);
-		 do {
-			 if (sybmolArrayList.contains(symbolchoice2)) {
-			System.out.print("change your symbol you enterd a chosen symbol:");
-			symbolchoice2 = scan.next().charAt(0); 
-			}
-			 
-		} while (sybmolArrayList.contains(symbolchoice2));
-		
+		do { 
+
+			System.out.println("player 2 please choose a symbol X or O :");
+			symbolchoice2 = scan.next().charAt(0);
+
+			do {
+				if (symbolchoice2==symbolchoice1) {
+					System.out.print("change your symbol you enterd a chosen symbol:");
+					symbolchoice2 = scan.next().charAt(0); 
+				}
+
+			} while (symbolchoice1==symbolchoice2);
+			valid = true;
+		} while (!valid);
 
 		System.out.println("player 1 will be playing with  : "+ symbolchoice1);
 		System.out.println("player 2 will be playing with  : "+ symbolchoice2);
@@ -66,13 +76,15 @@ public class TICTAC {
 			printboard(board); // Prints the result on the Board 
 
 			if (symbolchoice2=='O'|| symbolchoice2=='o'||symbolchoice2=='x'|| symbolchoice2=='X')
+			////////////////////////////////////	
+				
 				System.out.println(" Player 2 enter your choice of slots :");
 			int slotchoice1= scan.nextInt();
 			Slotplace(board,slotchoice1, symbolchoice2,slotchoiceArrayList);
 
 			printboard(board);
 		} 
-		}
+	}
 
 
 	// function to print the board 
@@ -152,7 +164,7 @@ public class TICTAC {
 				System.out.println("Enter another slot number:");
 				slotchoice= scan.nextInt(); 
 			}
-				
+
 
 		} while (takenBoolean);
 
