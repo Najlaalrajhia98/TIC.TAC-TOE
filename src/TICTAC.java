@@ -1,11 +1,10 @@
 import java.awt.datatransfer.Clipboard;
+import java.awt.im.InputMethodHighlight;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.IllegalFormatCodePointException;
 import java.util.Scanner;
 
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
 
 /**
@@ -27,11 +26,11 @@ public class TICTAC {
 
 
 		char [][] board = { {'-','*','-','*','-'},
-				            {' ','|',' ','|',' '},
-			               	{' ','|',' ','|',' '},
-				            {' ','|',' ','|',' '},
-			             	{'-','*','-','*','-'} 
-		     			};
+				{' ','|',' ','|',' '},
+				{' ','|',' ','|',' '},
+				{' ','|',' ','|',' '},
+				{'-','*','-','*','-'} 
+		};
 
 		printboard(board); // call the function
 		Scanner scan = new Scanner(System.in);
@@ -41,32 +40,40 @@ public class TICTAC {
 		char symbolchoice1 = scan.next().charAt(0);
 		sybmolArrayList.add(symbolchoice1);
 
+
 		System.out.println("player 2 please choose a symbol X or O :");
 		char symbolchoice2 = scan.next().charAt(0);
-		sybmolArrayList.add(symbolchoice2);
+		 do{
+			 if (sybmolArrayList.contains(symbolchoice1)) {
+		 }
+			System.out.print("change your symbol you enterd a chosen symbol:");
+			
+			symbolchoice2 = scan.next().charAt(0);
+		}while (sybmolArrayList.contains(symbolchoice2));
+		
 
 		System.out.println("player 1 will be playing with  : "+ symbolchoice1);
 		System.out.println("player 2 will be playing with  : "+ symbolchoice2);
 
-			while (true) {
-				// player 1 might choose x or o (capital or small letters)
-				if (symbolchoice1=='X'|| symbolchoice1=='x'||symbolchoice1=='o'||symbolchoice1=='O'  )
-			// USER X OR O WILL BE PLAYING 
-			System.out.println("Player 1 enter your choice of slots :");
+		for (int i=0; i<=4;i++) {
+			// player 1 might choose x or o (capital or small letters)
+			if (symbolchoice1=='X'|| symbolchoice1=='x'||symbolchoice1=='o'||symbolchoice1=='O'  )
+				// USER X OR O WILL BE PLAYING 
+				System.out.println("Player 1 enter your choice of slots :");
 			int slotchoice= scan.nextInt();
 			Slotplace(board,slotchoice, symbolchoice1,slotchoiceArrayList);
 
 			printboard(board); // Prints the result on the Board 
 
 			if (symbolchoice2=='O'|| symbolchoice2=='o'||symbolchoice2=='x'|| symbolchoice2=='X')
-			System.out.println(" Player 2 enter your choice of slots :");
+				System.out.println(" Player 2 enter your choice of slots :");
 			int slotchoice1= scan.nextInt();
 			Slotplace(board,slotchoice1, symbolchoice2,slotchoiceArrayList);
 
 			printboard(board);
 		} 
+		}
 
-	}
 
 	// function to print the board 
 	public static void printboard(char [] [] board ) {
@@ -92,16 +99,16 @@ public class TICTAC {
 		if (user == 'X' || user=='x')  
 		{
 			symbol='X';
-			
+
 		} 
 		else if (user == 'O' || user=='o')
 		{
 			symbol='O';
 		} 
 		Boolean takenBoolean= false;
-		
+
 		do {
-			
+
 			takenBoolean= false;
 			if (!slotchoiceArrayList.contains(slotchoice)){
 				takenBoolean= false;
@@ -163,7 +170,7 @@ public class TICTAC {
 
 			} 
 		}
-		
+
 		// to check the COLUMS
 		for(int cloum=0;cloum<=4;cloum=cloum+2) { 
 
@@ -187,6 +194,6 @@ public class TICTAC {
 			printboard(board);
 			System.exit(0);
 		}
-		
 	}
+
 }
