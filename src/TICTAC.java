@@ -11,10 +11,6 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
 
 
 /**
- * 
- */
-
-/**
  * @author LAP-7
  *
  */
