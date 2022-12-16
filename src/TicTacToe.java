@@ -1,3 +1,4 @@
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +11,7 @@ public class TicTacToe {
 
     /**
      * 
+     *  TikTakToe game using X and O as players and checks the winner.
      * @param args:
      */
     public static void main(String[] args) {
@@ -22,7 +24,7 @@ public class TicTacToe {
                 { ' ', '|', ' ', '|', ' ' },
                 { ' ', '|', ' ', '|', ' ' }, 
                 { '-', '*', '-', '*', '-' } 
-                };
+        };
 
         printBoard(board); // call the function to print the board.
         Scanner scan = new Scanner(System.in);
@@ -31,6 +33,7 @@ public class TicTacToe {
         char symbolChoice1;
         char symbolChoice2;
         boolean playStatus = true;
+
 
         do {
             // player one choice of symbol
@@ -46,7 +49,7 @@ public class TicTacToe {
         } while (!valid);
 
         do { 
-             // player two choice of symbol
+            // player two choice of symbol
             System.out.println("player 2 please choose a symbol X or O :");
             symbolChoice2 = scan.next().charAt(0);
             do { 
@@ -116,17 +119,22 @@ public class TicTacToe {
         }
     }
 
-    
+
     public static void Slotplace(char[][] board, int slotchoice, char player, ArrayList<Integer> slotchoiceArrayList) {
+        
+        Boolean takenBoolean = false;
         Scanner scan = new Scanner(System.in);
         char symbol = ' ';
-        if (player == 'X' || player == 'x') {
+        
+        if (player == 'X' || player == 'x') 
+        {
             symbol = 'X';
 
-        } else if (player == 'O' || player == 'o') {
+        } 
+        else if (player == 'O' || player == 'o') 
+        {
             symbol = 'O';
         }
-        Boolean takenBoolean = false;
 
         do {
 
@@ -173,39 +181,22 @@ public class TicTacToe {
 
         } while (takenBoolean);
 
-        
-     // To check the winner 
-        boolean winner= false; 
-        
-        for (int row = 1; row <= 3; row++) {
 
-            if (board[row][0] == symbol && board[row][2] == symbol && board[row][4] == symbol) {
-                System.out.println("WE HAVE A WINNER YAY :)");
-                printBoard(board);
-                winner = true;
-
-            }
-        }
-        // To check the column 
-        for (int column = 0; column <= 4; column = column + 2) {
-
-            if (board[1][column] == symbol && board[2][column] == symbol && board[3][column] == symbol) {
-                System.out.println("WE HAVE A WINNER YAY :)");
-                printBoard(board);
-                winner = true;
-            }
-        }
-        // To check the diagonals
-        if (board[1][0] == symbol && board[2][2] == symbol && board[3][4] == symbol) {
-            System.out.println("WE HAVE A WINNER YAY :)");
+        // To check the winner 
+        if (board[1][0]== symbol && board[1][2]== symbol && board[1][4]== symbol || 
+                board[2][0]== symbol && board[2][2]== symbol && board[2][4]== symbol ||
+                board[3][0]== symbol && board[3][2]== symbol && board[3][4]== symbol ||
+                board[1][0]== symbol && board[2][0]== symbol && board[3][0]== symbol ||
+                board[1][2]== symbol && board[2][2]== symbol && board[3][2]== symbol ||
+                board[1][4]== symbol && board[2][4]== symbol && board[3][4]== symbol ||
+                board[1][0]== symbol && board[2][2]== symbol && board[3][4]== symbol ||
+                board[1][4]== symbol && board[2][2]== symbol && board[3][0]== symbol) 
+        {
+            System.out.println("We have a winner Yay :) ");
             printBoard(board);
-            winner = true;
+            System.exit(0);
         }
-        if (board[3][0] == symbol && board[2][2] == symbol && board[1][4] == symbol) {
-            System.out.println("WE HAVE A WINNER YAY :)");
-            printBoard(board);
-            winner = true;
-        }
+
     }
 
 }
