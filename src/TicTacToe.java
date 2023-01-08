@@ -111,11 +111,11 @@ public class TicTacToe {
 
 
             boolean draw = true;  // Flag to indicate if the game is a draw
-            for (int i = 1; i < 4; i++) 
+            for (int row = 1; row < 4; row++) 
             {
-                for (int j = 0; j < 5; j += 2) 
+                for (int column = 0; column < 5; column += 2) 
                 {
-                    if (board[i][j] == ' ') 
+                    if (board[row][column] == ' ') 
                     {  // If an empty slot is found
                         draw = false;  // Set the flag to false
                     }
@@ -292,9 +292,9 @@ public class TicTacToe {
             FileWriter writer = new FileWriter(DATA_FILE_PATH);
 
             // Write the board to the file
-            for (int i = 0; i < board.length; i++) {
-                for (int j = 0; j < board[i].length; j++) {
-                    writer.write(board[i][j]);
+            for (int row = 0; row < board.length; row++) {
+                for (int column = 0; column < board[row].length; column++) {
+                    writer.write(board[row][column]);
                 }
                 writer.write('\n');
             }
@@ -321,10 +321,10 @@ public class TicTacToe {
             Scanner fileScanner = new Scanner(file);
 
             // Read the board state from the file
-            for (int i = 0; i < 5; i++) {
+            for (int row = 0; row < 5; row++) {
                 String line = fileScanner.nextLine();
-                for (int j = 0; j < 5; j++) {
-                    board[i][j] = line.charAt(j);
+                for (int column = 0; column < 5; column++) {
+                    board[row][column] = line.charAt(column);
                 }
             }
 
